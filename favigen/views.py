@@ -110,7 +110,6 @@ def message_sent(request):
 def saved_icons(request):
     user = request.user
     images = Image.objects.filter(uploaded_by=user)
-    # favicons = Favicon.objects.all()
 
     context = {"favicons": images}
     return render(request, "favigen/saved-icons.html", context)
