@@ -25,10 +25,10 @@ def home_page(request):
 
 def signup_page(request):
     """
-    This view renders the signup page and then takes in user data 
+    This view renders the signup page and then takes in user data
     (First Name, Email and Password) from the HTML form as a POST request.
-    It then extracts the user's first name from the form and uses it in a 
-    custom message if the registration is successful, after which it 
+    It then extracts the user's first name from the form and uses it in a
+    custom message if the registration is successful, after which it
     redirects the user to the home page.
     """
     if not request.user.is_anonymous:
@@ -84,11 +84,11 @@ def contact_page(request):
     user = request.user
     context = {}
 
-    if request.method == 'POST':
-        subject = request.POST.get('subject')
-        email = request.POST.get('email')
-        message = request.POST.get('subject')
-        priority = request.POST.get('priority')
+    if request.method == "POST":
+        subject = request.POST.get("subject")
+        email = request.POST.get("email")
+        message = request.POST.get("subject")
+        priority = request.POST.get("priority")
 
         message = Message.objects.create(
             title=subject,
@@ -106,26 +106,26 @@ def message_sent(request):
     return render(request, "favigen/message_sent.html")
 
 
-@login_required(login_url='fav:login')
+@login_required(login_url="fav:login")
 def saved_icons(request):
     user = request.user
-    current_user_email = user.email
-    favicons = Favicon.objects.all()
+    images = Image.objects.filter(uploaded_by=user)
+    # favicons = Favicon.objects.all()
 
-    context = {'favicons': favicons}
+    context = {"favicons": images}
     return render(request, "favigen/saved-icons.html", context)
 
 
-@login_required(login_url='fav:login')
+@login_required(login_url="fav:login")
 def generated_icon(request, pk):
-    user=request.user
+    user = request.user
     favicon = Favicon.objects.get(id=pk)
 
-    context = {'favicon': favicon}
+    context = {"favicon": favicon}
     return render(request, "favigen/generated-icon.html", context)
 
 
-@login_required(login_url='fav:login')
+@login_required(login_url="fav:login")
 def generate_icon(request):
     user = request.user
     context = {}
@@ -146,8 +146,8 @@ def generate_icon(request):
 
         # Get current date and add the string prefix "FAV" to it
         a = f"FAV{str(datetime.now())}"
-        # Remove special chacracters and spaces from the date string
-        b = ''.join(re.split(r'-|\.|:|\ ', a))
+        # Remove special characters and spaces from the date string
+        b = "".join(re.split(r"-|\.|:|\ ", a))
         # Combine the date string with file extension to form new file name
         new_name = f"{b}.{f_type}"
 
@@ -158,26 +158,27 @@ def generate_icon(request):
             title=title,
             uploaded_image=image_file,
             favourite=favourite,
-            uploaded_by=user)
+            uploaded_by=user,
+        )
         img.save()
 
         # Create the zipped file
         user_dir = f"static/media/user_{user.id}"
         zippify.zippify(favs_dir, user_dir, b)
 
-
         fav = Favicon.objects.create(
             image=img,
-            original_filename=name, 
+            original_filename=name,
             new_filename=new_name,
             file_type=f_type,
             file_byte_size=f_size,
-            embed_link=embed_link)
+            embed_link=embed_link,
+        )
         fav.save()
 
         saved_fav = Favicon.objects.get(new_filename=new_name)
         path = Path(os.path.join(user_dir, f"{b}.zip"))
-        with path.open(mode='rb') as f:
+        with path.open(mode="rb") as f:
             saved_fav.zipped_favs = File(f, name=path.name)
             saved_fav.save()
 
