@@ -1,21 +1,21 @@
-from datetime import datetime
-from django.core.files import File
-from django.core.files.storage import FileSystemStorage
-
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, logout, authenticate
-from favigen.forms import CustomUserCreationForm, CustomAuthenticationForm
-
-from pathlib import Path
-from .models import *
-from .utils import zippify
-from .utils import utility
-from .utils.favigenerator import generate_favicon
-
 import os
 import re
+from datetime import datetime
+from pathlib import Path
+
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from django.core.files import File
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
+
+from favigen.forms import CustomUserCreationForm, CustomAuthenticationForm
+from .models import *
+from .utils import utility
+from .utils import zippify
+from .utils.favigenerator import generate_favicon
+
 
 # Create your views here.
 def home_page(request):
@@ -145,7 +145,7 @@ def generate_icon(request):
         # Get current date and add the string prefix "FAV" to it
         a = f"FAV{str(datetime.now())}"
         # Remove special characters and spaces from the date string
-        b = "".join(re.split(r"-|\.|:|\ ", a))
+        b = "".join(re.split(r"-|\.|:| ", a))
         # Combine the date string with file extension to form new file name
         new_name = f"{b}.{f_type}"
 
