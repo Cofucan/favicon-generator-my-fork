@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="assets/css/sign-up.css" class="css" />
+    </head>
+    <body>
+        <header>
+        </header>
+
+        <main>
+            <div class="left">
+                <div class="logo-main">
+                    <a href="">
+                        <img src="" alt="" />
+                    </a>
+                </div>
+                <div class="desc">
+                    <h2>FaviGen</h2>
+                    <p>A powerful, yet easy-to-use Favicon generator for your Favicons</p>
+                </div>
+            </div>
+            <div class="meta">
+                <p class="version">Version 1.0</p>
+                <img src="" alt="" />
+            </div>
+
+            <div class="right">
+                <div class="already">
+                    Already have an account? <span><a href="">Log in</a></span>
+                </div>
+
+                <div class="form-container">
+                    <form action="" method="POST" id="signup" class="signup">
+                        <div class="form-title">
+                            <h2>Sign Up</h2>
+                        </div>
+                        <div class="details">
+                            <input type="text" id="f_name" class="f_name" name="first_name" required/>
+                            <img src="" alt="error-icon" class="error-icon" />
+                            <p class="error-text">Looks like this is not an email</p>
+                        </div>
+                        <div class="details">
+                            <input type="text" id="f_name" class="f_name" name="first_name" required/>
+                            <img src="" alt="error-icon" class="error-icon" />
+                            <p class="error-text">Looks like this is not an email</p>
+                        </div>
+                        <div class="details">
+                            <input type="text" id="f_name" class="f_name" name="first_name" required/>
+                            <img src="" alt="error-icon" class="error-icon" />
+                            <p class="error-text">Looks like this is not an email</p>
+                        </div>
+                        <div class="details">
+                            <input type="text" id="f_name" class="f_name" name="first_name" required/>
+                            <img src="" alt="error-icon" class="error-icon" />
+                            <p class="error-text">Looks like this is not an email</p>
+                        </div>
+                        <div class="details">
+                            <input type="checkbox" id="remember" name="remember" value="Remember" class="cremember" />
+                            <label class="remember">Remember me</label>
+                        </div>
+
+                        <button type="submit">Get Started</button>
+
+                        <div class="details">
+                            <hr />
+                            <label class="alt_signup">Or sign up with</label>
+                            <hr />
+                        </div>
+
+                        <div class="social-icon">
+                            <span>
+                                <img src="{% static '/favigen/img/facebook.svg' %}" alt="facebook" />
+                            </span>
+                            <span>
+                                <img src="{% static '/favigen/img/google.svg' %}" alt="google" />
+                            </span>
+                            <span>
+                                <img src="{% static '/favigen/img/twitter.svg' %}" alt="twitter" />
+                            </span>
+                        </div>
+        
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer></footer>
+    </body>
+</html>
